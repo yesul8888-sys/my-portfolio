@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>웹사이트 구축 기획서 — 박예슬 포트폴리오</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+:root{
+  --bg:#ffffff; --soft:#f3f1ec; --line:#e6e2d9; --card:#ffffff; --pill-bg:#e9e5db;
+  --olive:#656a43; --olive-deep:#3b3f24; --olive-key:#a9ad7f; --olive-tint:#eef0e2;
+  --content:1080px; --gut:20px;
+  --sp2:10px; --sp3:20px; --sp4:30px; --sp5:40px; --sp6:60px; --sp7:80px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Pretendard',-apple-system,'Malgun Gothic',sans-serif;color:var(--olive-deep);background:var(--bg);line-height:1.7;-webkit-font-smoothing:antialiased;word-break:keep-all;overflow-wrap:break-word}
+a{color:var(--olive);text-underline-offset:3px}
+.shell{max-width:var(--content);margin:0 auto;padding:0 5%}
+
+.pill{display:inline-block;font-size:11.5px;font-weight:700;letter-spacing:.06em;background:var(--pill-bg);color:var(--olive);padding:8px 18px;border-radius:999px;margin-bottom:var(--sp3)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;box-shadow:0 2px 10px rgba(22,21,19,.05);padding:var(--sp5)}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:var(--gut)}
+.span-12{grid-column:span 12}.span-6{grid-column:span 6}.span-4{grid-column:span 4}.span-3{grid-column:span 3}
+
+/* ---------- cover ---------- */
+.cover{padding:var(--sp7) 0 var(--sp6);text-align:center}
+.cover h1{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.02em;line-height:1.3;margin-bottom:var(--sp3)}
+.cover p{font-size:15px;color:var(--olive)}
+.meta{display:flex;justify-content:center;flex-wrap:wrap;gap:var(--sp2);margin-top:var(--sp4)}
+.meta span{font-size:12.5px;font-weight:700;background:var(--card);padding:8px 16px;border-radius:999px;box-shadow:0 2px 8px rgba(22,21,19,.05)}
+
+/* ---------- sections ---------- */
+.sec{padding:var(--sp5) 0}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:var(--sp3)}
+.sec-head .no{font-size:13px;font-weight:800;color:var(--olive-key)}
+.sec-head h2{font-size:24px;font-weight:800;letter-spacing:-.01em}
+.card h3{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--olive);margin-bottom:var(--sp2)}
+.card p, .card li{font-size:15px}
+.card ul{list-style:none}
+.card li{padding:12px 0;border-bottom:1px solid var(--line);display:flex;gap:12px}
+.card li:last-child{border-bottom:0}
+.card li b{min-width:96px;font-weight:800}
+.lead{font-size:18px !important;font-weight:700;line-height:1.6}
+.sub{color:var(--olive);margin-top:var(--sp2)}
+.tag{display:inline-block;font-size:11px;font-weight:800;background:var(--olive-tint);color:var(--olive);padding:4px 10px;border-radius:999px;margin-left:6px;vertical-align:middle}
+
+/* ---------- target ---------- */
+.target .big{font-size:20px;font-weight:800;margin-bottom:6px}
+
+/* ---------- color ---------- */
+.swatches{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:var(--sp3)}
+.sw{border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.sw .chip{height:72px}
+.sw .info{padding:10px 12px;font-size:12px;background:var(--card)}
+.sw .info b{display:block;font-size:13px}
+.note{font-size:13px !important;color:var(--olive);margin-top:var(--sp3);padding:12px 16px;background:var(--olive-tint);border-radius:12px}
+
+/* ---------- features ---------- */
+.feat{display:flex;flex-direction:column;gap:8px}
+.feat .num{width:34px;height:34px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-bottom:6px}
+.feat h4{font-size:17px;font-weight:800}
+.feat p{font-size:13.5px !important;color:var(--olive)}
+
+/* ---------- sitemap ---------- */
+.sitemap{display:flex;flex-direction:column;align-items:center;gap:0}
+.node{background:var(--olive-deep);color:#fff;font-weight:800;font-size:14px;padding:12px 26px;border-radius:999px}
+.vline{width:2px;height:28px;background:var(--line)}
+.row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;width:100%;position:relative;padding-top:28px}
+.row::before{content:'';position:absolute;top:0;left:12.5%;right:12.5%;height:2px;background:var(--line)}
+.leaf{position:relative;text-align:center;background:var(--soft);border-radius:14px;padding:16px 10px}
+.leaf::before{content:'';position:absolute;top:-28px;left:50%;width:2px;height:28px;background:var(--line)}
+.leaf b{display:block;font-size:15px;font-weight:800}
+.leaf span{font-size:12px;color:var(--olive)}
+.details{margin-top:var(--sp4);width:100%}
+.details .lbl{text-align:center;font-size:12px;font-weight:800;color:var(--olive);letter-spacing:.06em;margin-bottom:12px}
+.detail-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.detail-grid div{border:1.5px dashed var(--olive-key);border-radius:12px;text-align:center;padding:14px 6px;font-size:13px;font-weight:700;color:var(--olive)}
+
+/* ---------- purpose ---------- */
+.purpose{background:var(--olive-deep);color:#f3f1ec}
+.purpose h3{color:var(--olive-key)}
+.purpose .lead{color:#fff}
+.purpose .sub{color:#d6d8c2}
+.kw{display:flex;gap:8px;margin-top:var(--sp3)}
+.kw span{font-size:12px;font-weight:800;background:rgba(255,255,255,.1);color:#fff;padding:7px 14px;border-radius:999px}
+
+/* ---------- home wireframe ---------- */
+.wf-wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:var(--sp5);align-items:start}
+.wf{border:1.5px solid var(--line);border-radius:16px;overflow:hidden;background:var(--soft)}
+.wf-gnb{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:var(--card);border-bottom:1px solid var(--line);position:relative}
+.wf-logo{font-size:13px;font-weight:800}
+.wf-menu{display:flex;align-items:center;gap:8px;font-size:11px;font-weight:800;color:var(--olive)}
+.wf-burger{width:30px;height:30px;border-radius:50%;background:var(--olive-deep);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px}
+.wf-burger i{display:block;width:12px;height:1.5px;background:#fff}
+.wf-drop{position:absolute;right:12px;top:52px;background:var(--card);border-radius:12px;box-shadow:0 8px 24px rgba(22,21,19,.12);padding:8px;z-index:2;min-width:120px}
+.wf-drop div{font-size:12px;font-weight:700;padding:8px 12px;border-radius:8px}
+.wf-drop div:hover{background:var(--olive-tint)}
+.wf-hero{padding:22px 0 26px;overflow:hidden}
+.wf-hero .cap{font-size:11px;font-weight:800;letter-spacing:.06em;color:var(--olive);padding:0 18px;margin-bottom:12px}
+.wf-track{display:flex;gap:10px;width:max-content;animation:roll 16s linear infinite}
+.wf-track div{width:120px;aspect-ratio:3/4;border-radius:10px;background:var(--olive-key);display:flex;align-items:flex-end;padding:8px;font-size:10.5px;font-weight:800;color:#fff}
+.wf-track div:nth-child(even){background:var(--olive)}
+@keyframes roll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.wf-track{animation:none}}
+.wf-arrow{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--olive);padding:12px 18px 0}
+.wf-arrow span{background:var(--card);border:1.5px dashed var(--olive-key);border-radius:8px;padding:5px 10px}
+.spec ol{list-style:none;counter-reset:n}
+.spec li{counter-increment:n;padding:14px 0;border-bottom:1px solid var(--line);display:block}
+.spec li:last-child{border-bottom:0}
+.spec li::before{content:counter(n,decimal-leading-zero);font-size:12px;font-weight:800;color:var(--olive-key);margin-right:10px}
+.spec li b{font-size:15px}
+.spec li p{font-size:13.5px !important;color:var(--olive);margin-top:4px}
+.leaf.menu{border:1.5px solid var(--olive-tint)}
+.leaf em{display:inline-block;font-style:normal;font-size:10.5px;font-weight:800;background:var(--olive-tint);color:var(--olive);padding:2px 8px;border-radius:999px;margin-bottom:6px}
+
+footer{padding:var(--sp6) 0 var(--sp7);text-align:center;font-size:12.5px;color:var(--olive)}
+
+@media(max-width:860px){
+  .span-6,.span-4{grid-column:span 12}
+  .span-3{grid-column:span 6}
+  .swatches{grid-template-columns:repeat(2,1fr)}
+  .row{grid-template-columns:repeat(2,1fr);row-gap:40px}
+  .row::before{display:none}
+  .detail-grid{grid-template-columns:repeat(3,1fr)}
+  .wf-wrap{grid-template-columns:1fr}
+  .card li{flex-direction:column;gap:2px}
+}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="shell">
+    <span class="pill">WEB PLANNING DOCUMENT</span>
+    <h1>포트폴리오 웹사이트 기획서</h1>
+    <p>디자이너의 브랜드 아이덴티티를 전달하는 포트폴리오 웹사이트 구축 계획</p>
+  </div>
+</header>
+
+<main class="shell">
+
+  <!-- 1. 기획배경 -->
+  <section class="sec">
+    <div class="sec-head"><span class="no">01</span><h2>기획 배경</h2></div>
+    <div class="card">
+      <p class="lead">브랜딩 디자이너 박예슬의 작업을 한곳에 모아 보여주는 포트폴리오 사이트를 만듭니다.</p>
+      <p class="sub">본 사이트는 작업 과정과 결과물을 축적하는 아카이브 역할을 하는 동시에, 잠재 클라이언트에게 포트폴리오를 공유하고 작업 의도를 설명하는 커뮤니케이션 채널로 활용됩니다.</p>
+    </div>
+  </section>
+
+  <!-- 2. 방문자 -->
+  <section class="sec">
+    <div class="sec-head"><span class="no">02</span><h2>주요 타깃</h2></div>
+    <div class="bento target">
+      <div class="card span-6">
+        <h3>PRIMARY</h3>
+        <div class="big">잠재 클라이언트</div>
+        <p class="sub">브랜딩 프로젝트 의뢰를 검토하며 디자이너의 작업 스타일과 역량을 확인하려는 기업 및 개인</p>
+      </div>
+      <div class="card span-6">
+        <h3>SECONDARY</h3>
+        <div class="big">브랜딩 관심 사용자</div>
+        <p class="sub">브랜드 디자인에 관심을 갖고 레퍼런스와 영감을 찾는 일반 방문자</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. 디자인 방향 -->
+  <section class="sec">
+    <div class="sec-head"><span class="no">03</span><h2>디자인 방향</h2></div>
+    <div class="bento">
+      <div class="card span-6">
+        <h3>REFERENCE</h3>
+        <ul>
+          <li><b>참고 사이트</b><a href="https://www.byblankspace.com/" target="_blank" rel="noopener">byblankspace.com</a></li>
+          <li><b>컬러 레퍼런스 1</b><a href="https://kr.pinterest.com/pin/633387443441608/" target="_blank" rel="noopener">Pinterest 핀 #633387…</a></li>
+          <li><b>컬러 레퍼런스 2</b><a href="https://kr.pinterest.com/pin/814377545154553701/" target="_blank" rel="noopener">Pinterest 핀 #814377…</a></li>
+        </ul>
+      </div>
+      <div class="card span-6">
+        <h3>KEY COLOR</h3>
+        <p class="lead">라이트 소프트 올리브를<br>메인 키 컬러로 적용합니다</p>
+        <div class="swatches">
+          <div class="sw"><div class="chip" style="background:#a9ad7f"></div><div class="info"><b>Key</b>#A9AD7F</div></div>
+          <div class="sw"><div class="chip" style="background:#656a43"></div><div class="info"><b>Text</b>#656A43</div></div>
+          <div class="sw"><div class="chip" style="background:#3b3f24"></div><div class="info"><b>Deep</b>#3B3F24</div></div>
+          <div class="sw"><div class="chip" style="background:#f3f1ec"></div><div class="info"><b>Base</b>#F3F1EC</div></div>
+        </div>
+        <p class="note">본 팔레트는 제안안이며, 컬러 레퍼런스와 비교 검토 후 Key 컬러 값을 최종 확정합니다. Text·Deep·Base는 현재 메인 페이지(index.html)에 적용된 값입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 핵심 기능 -->
+  <section class="sec">
+    <div class="sec-head"><span class="no">04</span><h2>핵심 기능 <span class="tag">필수 구현</span></h2></div>
+    <div class="bento">
+      <div class="card span-3 feat"><div class="num">1</div><h4>메인 히어로</h4><p>프로젝트 이미지가 자동으로 흐르는 롤링 갤러리로 첫 화면을 구성하고, 이미지 클릭 시 상세페이지로 연결합니다.</p></div>
+      <div class="card span-3 feat"><div class="num">2</div><h4>Works 레이아웃</h4><p>대표 작업물을 한눈에 비교할 수 있도록 정돈된 목록으로 구성합니다.</p></div>
+      <div class="card span-3 feat"><div class="num">3</div><h4>프로젝트 상세페이지</h4><p>프로젝트별 배경, 과정, 결과를 이미지 중심으로 상세히 소개합니다.</p></div>
+      <div class="card span-3 feat"><div class="num">4</div><h4>컨택트</h4><p>프로젝트 의뢰와 협업 문의를 간편하게 접수할 수 있는 창구를 제공합니다.</p></div>
+    </div>
+  </section>
+
+  <!-- 5. Home 화면 구성 -->
+  <section class="sec">
+    <div class="sec-head"><span class="no">05</span><h2>Home 화면 구성</h2></div>
+    <div class="card">
+      <div class="wf-wrap">
+        <div class="wf" aria-label="Home 화면 와이어프레임">
+          <div class="wf-gnb">
+            <span class="wf-logo">LOGO</span>
+            <span class="wf-menu">MENU <span class="wf-burger"><i></i><i></i><i></i></span></span>
+            <div class="wf-drop"><div>About</div><div>Works</div><div>Contact</div></div>
+          </div>
+          <div class="wf-hero">
+            <div class="cap">MAIN HERO — 롤링 이미지</div>
+            <div class="wf-track">
+              <div>Project 01</div><div>Project 02</div><div>Project 03</div><div>Project 04</div><div>Project 05</div><div>Project 06</div>
+              <div>Project 01</div><div>Project 02</div><div>Project 03</div><div>Project 04</div><div>Project 05</div><div>Project 06</div>
+            </div>
+            <div class="wf-arrow">이미지 클릭 → <span>프로젝트 상세페이지</span></div>
+          </div>
+        </div>
+        <div class="spec">
+          <h3>SCREEN SPEC</h3>
+          <ol>
+            <li><b>GNB</b><p>좌측에 로고, 우측에 메뉴 버튼을 배치해 상단 영역을 간결하게 유지합니다.</p></li>
+            <li><b>드롭다운 메뉴</b><p>메뉴 버튼 클릭 시 About · Works · Contact 항목이 아래로 펼쳐집니다.</p></li>
+            <li><b>메인 히어로 (롤링 이미지)</b><p>참고 사이트(byblankspace.com)처럼 프로젝트 이미지가 연속해서 흐르는 형식으로 구성합니다.</p></li>
+            <li><b>상세페이지 연결</b><p>히어로의 각 이미지를 클릭하면 해당 프로젝트 상세페이지로 이동합니다.</p></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 사이트 구조 -->
+  <section class="sec">
+    <div class="sec-head"><span class="no">06</span><h2>정보 구조</h2></div>
+    <div class="card">
+      <div class="sitemap">
+        <div class="node">Home</div>
+        <div class="vline"></div>
+        <div class="row">
+          <div class="leaf"><em>첫 화면</em><b>메인 히어로</b><span>롤링 이미지</span></div>
+          <div class="leaf menu"><em>GNB 메뉴</em><b>About</b><span>디자이너 소개</span></div>
+          <div class="leaf menu"><em>GNB 메뉴</em><b>Works</b><span>작업물 목록</span></div>
+          <div class="leaf menu"><em>GNB 메뉴</em><b>Contact</b><span>문의 접수</span></div>
+        </div>
+        <div class="details">
+          <div class="lbl">메인 히어로 이미지 클릭 시 이동하는 프로젝트 상세페이지 (약 6개)</div>
+          <div class="detail-grid">
+            <div>Project 01</div><div>Project 02</div><div>Project 03</div>
+            <div>Project 04</div><div>Project 05</div><div>Project 06</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. 개설목적 -->
+  <section class="sec">
+    <div class="sec-head"><span class="no">07</span><h2>구축 목표</h2></div>
+    <div class="card purpose">
+      <h3>GOAL</h3>
+      <p class="lead">클라이언트에게 명확한 디자인 방향성과 시각 자료를 제공합니다</p>
+      <p class="sub">디자이너 박예슬이 구축해 온 브랜드 아이덴티티와 작업 스타일을 간결하고 압축적인 구성으로 전달하는 포트폴리오 웹사이트를 지향합니다.</p>
+      <div class="kw"><span>Compact</span><span>Concise</span><span>Identity</span></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>박예슬 포트폴리오 웹사이트 · 구축 기획서 초안 v0.1</footer>
+
+</body>
+</html>

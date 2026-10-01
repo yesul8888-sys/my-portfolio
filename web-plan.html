@@ -56,9 +56,9 @@ a{color:var(--olive);text-underline-offset:3px}
 .note{font-size:13px !important;color:var(--olive);margin-top:var(--sp3);padding:12px 16px;background:var(--olive-tint);border-radius:12px}
 
 /* ---------- features ---------- */
-.feat{display:flex;flex-direction:column;gap:8px}
+.feat{display:flex;flex-direction:column;gap:8px;padding:var(--sp4)}
 .feat .num{width:34px;height:34px;border-radius:50%;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;margin-bottom:6px}
-.feat h4{font-size:17px;font-weight:800}
+.feat h4{font-size:clamp(15px,1.6vw,17px);font-weight:800;white-space:nowrap}
 .feat p{font-size:13.5px !important;color:var(--olive)}
 
 /* ---------- sitemap ---------- */
@@ -196,9 +196,9 @@ footer{padding:var(--sp6) 0 var(--sp7);text-align:center;font-size:12.5px;color:
     <div class="sec-head"><span class="no">04</span><h2>핵심 기능 <span class="tag">필수 구현</span></h2></div>
     <div class="bento">
       <div class="card span-3 feat"><div class="num">1</div><h4>메인 히어로</h4><p>프로젝트 이미지가 자동으로 흐르는 롤링 갤러리로 첫 화면을 구성하고, 이미지 클릭 시 상세페이지로 연결합니다.</p></div>
-      <div class="card span-3 feat"><div class="num">2</div><h4>Works 레이아웃</h4><p>대표 작업물을 한눈에 비교할 수 있도록 정돈된 목록으로 구성합니다.</p></div>
-      <div class="card span-3 feat"><div class="num">3</div><h4>프로젝트 상세페이지</h4><p>프로젝트별 배경, 과정, 결과를 이미지 중심으로 상세히 소개합니다.</p></div>
-      <div class="card span-3 feat"><div class="num">4</div><h4>컨택트</h4><p>프로젝트 의뢰와 협업 문의를 간편하게 접수할 수 있는 창구를 제공합니다.</p></div>
+      <div class="card span-3 feat"><div class="num">2</div><h4>Works</h4><p>대표 작업물을 한눈에 비교할 수 있도록 정돈된 목록으로 구성합니다.</p></div>
+      <div class="card span-3 feat"><div class="num">3</div><h4>Works 상세페이지</h4><p>프로젝트별 배경, 과정, 결과를 이미지 중심으로 상세히 소개합니다.</p></div>
+      <div class="card span-3 feat"><div class="num">4</div><h4>컨택트</h4><p>클라이언트가 바로 의뢰할 수 있도록 이메일 등 연락처 정보를 안내합니다.</p></div>
     </div>
   </section>
 
@@ -246,7 +246,7 @@ footer{padding:var(--sp6) 0 var(--sp7);text-align:center;font-size:12.5px;color:
           <div class="leaf"><em>첫 화면</em><b>메인 히어로</b><span>롤링 이미지</span></div>
           <div class="leaf menu"><em>GNB 메뉴</em><b>About</b><span>디자이너 소개</span></div>
           <div class="leaf menu"><em>GNB 메뉴</em><b>Works</b><span>작업물 목록</span></div>
-          <div class="leaf menu"><em>GNB 메뉴</em><b>Contact</b><span>문의 접수</span></div>
+          <div class="leaf menu"><em>GNB 메뉴</em><b>Contact</b><span>연락처 안내</span></div>
         </div>
         <div class="details">
           <div class="lbl">메인 히어로 이미지 클릭 시 이동하는 프로젝트 상세페이지 (약 6개)</div>

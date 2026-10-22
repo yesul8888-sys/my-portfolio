@@ -261,6 +261,9 @@ select.in{appearance:none;padding-right:36px;
 }
 .field-label{display:flex;align-items:center;gap:var(--sp1);margin-bottom:6px;font-size:14px;font-weight:800}
 .field-label .req{color:var(--red)}
+/* 날짜 칸(왼쪽) 기준으로 결제 수단 칸 맞춤: 라벨 줄 높이를 날짜 쪽 버튼(오늘/어제) 높이에, 입력칸 높이를 날짜 칸 높이에 통일 */
+.form-top .field-label{min-height:29px}
+.form-top .in{height:52px}
 .chips{display:flex;gap:6px;margin-left:auto}
 .chip{
   padding:2px 12px;background:var(--paper);border:2px solid var(--ink);border-radius:999px;font-size:13px;font-weight:700;
@@ -305,6 +308,8 @@ td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:now
 td.num{font-size:13px}
 td.desc{text-transform:none}
 td.date{white-space:nowrap;font-weight:700}
+td.date .time{display:block;font-size:12px;font-weight:400}
+.date-time{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--sp1)}
 tr.is-sel td{background:rgba(0,0,0,.08)}
 .chk{width:20px;height:20px;accent-color:var(--ink);cursor:pointer}
 .tag{display:inline-block;margin-right:6px;padding:0 8px;border:1.5px solid var(--ink);border-radius:999px;font-size:12px;font-weight:700;vertical-align:1px}
@@ -508,7 +513,10 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
               <button type="button" class="chip" data-day="-1" aria-pressed="false">어제</button>
             </div>
           </div>
-          <input class="in" type="date" id="fDate" required>
+          <div class="date-time">
+            <input class="in" type="date" id="fDate" required>
+            <input class="in" type="time" id="fTime" step="1" value="00:00:00" aria-label="시간 (시:분:초)">
+          </div>
         </div>
         <div id="methodField">
           <div class="field-label"><label for="fMethod">결제 수단</label></div>
@@ -748,6 +756,7 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
   $('#saveBtn').addEventListener('click', () => {
     const msg = $('#formMsg');
     const date = $('#fDate').value;
+    const time = $('#fTime').value || '00:00:00';
     msg.textContent = '';
     $$('#rows .err').forEach(el => el.classList.remove('err'));
 
@@ -769,11 +778,12 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
     const method = view.type === 'expense' ? $('#fMethod').value : 'cash';
     const base = Date.now();
     filled.forEach((r, k) => state.items.push({
-      id: base + k, type: view.type, date, desc: r.desc.trim() || r.cat, cat: r.cat, amt: r.n, method
+      id: base + k, type: view.type, date, time: time.length === 5 ? time + ':00' : time, desc: r.desc.trim() || r.cat, cat: r.cat, amt: r.n, method
     }));
     const ok = persist();
     view.month = date.slice(0, 7);
     resetRows();
+    $('#fTime').value = '00:00:00';
     renderAll();
     toast(ok ? `${filled.length}건을 적었어요.` : '화면에는 적었지만 브라우저에 보관하지 못했어요. 창을 닫으면 사라질 수 있어요.');
   });
@@ -855,20 +865,20 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
   $('#seedBtn').addEventListener('click', () => {
     const [y, m] = view.month.split('-').map(Number);
     const sample = [
-      [2, 'expense', '점심 김밥', '식비', 8500, 'card'],
-      [3, 'expense', '교통카드 충전', '교통/차량', 30000, 'card'],
-      [5, 'income', `${m}월 월급`, '급여', 2800000, 'cash'],
-      [7, 'expense', '휴대폰 요금', '주거/통신', 55000, 'card'],
-      [9, 'expense', '휴지·세제', '생활용품', 23400, 'card'],
-      [12, 'expense', '카페 라떼', '식비', 5500, 'cash'],
-      [14, 'expense', '전시 관람', '건강/문화', 18000, 'card'],
-      [18, 'expense', '친구 생일 선물', '경조사/회비', 35000, 'card'],
-      [20, 'income', '디자인 외주', '부수입', 400000, 'cash'],
-      [21, 'expense', '장보기', '식비', 42800, 'card']
+      [2, '12:20:15', 'expense', '점심 김밥', '식비', 8500, 'card'],
+      [3, '08:41:02', 'expense', '교통카드 충전', '교통/차량', 30000, 'card'],
+      [5, '09:00:00', 'income', `${m}월 월급`, '급여', 2800000, 'cash'],
+      [7, '19:05:48', 'expense', '휴대폰 요금', '주거/통신', 55000, 'card'],
+      [9, '16:32:27', 'expense', '휴지·세제', '생활용품', 23400, 'card'],
+      [12, '10:14:09', 'expense', '카페 라떼', '식비', 5500, 'cash'],
+      [14, '14:47:33', 'expense', '전시 관람', '건강/문화', 18000, 'card'],
+      [18, '20:18:56', 'expense', '친구 생일 선물', '경조사/회비', 35000, 'card'],
+      [20, '18:00:00', 'income', '디자인 외주', '부수입', 400000, 'cash'],
+      [21, '11:26:40', 'expense', '장보기', '식비', 42800, 'card']
     ];
     const base = Date.now();
-    sample.forEach(([d, type, desc, cat, amt, method], k) => state.items.push({
-      id: base + k, type, date: `${y}-${pad(m)}-${pad(d)}`, desc, cat, amt, method
+    sample.forEach(([d, time, type, desc, cat, amt, method], k) => state.items.push({
+      id: base + k, type, date: `${y}-${pad(m)}-${pad(d)}`, time, desc, cat, amt, method
     }));
     persist();
     renderAll();
@@ -958,7 +968,7 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
   function renderList(items) {
     const list = items
       .filter(it => view.filter === 'all' || it.type === view.filter)
-      .sort((a, b) => b.date.localeCompare(a.date) || b.id - a.id);
+      .sort((a, b) => b.date.localeCompare(a.date) || (b.time || '').localeCompare(a.time || '') || b.id - a.id);
     shownIds = list.map(it => it.id);
     [...selected].forEach(id => { if (!shownIds.includes(id)) selected.delete(id); });
 
@@ -970,7 +980,7 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
       const amt = (it.type === 'income' ? '+' : '') + money(it.amt);
       return `<tr class="${sel ? 'is-sel' : ''}">
         <td><input type="checkbox" class="chk" data-id="${it.id}" ${sel ? 'checked' : ''} aria-label="${esc(it.desc)} 선택"></td>
-        <td class="date">${pad(d.getMonth() + 1)}.${pad(d.getDate())} (${DAYS[d.getDay()]})</td>
+        <td class="date">${pad(d.getMonth() + 1)}.${pad(d.getDate())} (${DAYS[d.getDay()]})${it.time ? `<span class="time">${it.time}</span>` : ''}</td>
         <td class="desc"><span class="tag ${it.type}">${it.type === 'income' ? '수입' : '지출'}</span>${esc(it.desc)}</td>
         <td>${esc(it.cat)}</td>
         <td class="num">${it.method === 'cash' ? amt : ''}</td>
@@ -1006,6 +1016,7 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
   // ---------- 시작 ----------
   $('#todayText').textContent = `${today.getFullYear()}.${pad(today.getMonth() + 1)}.${pad(today.getDate())} (${DAYS[today.getDay()]})`;
   $('#fDate').value = ymd(today);
+  $('#fTime').value = '00:00:00';
   syncChips();
   resetRows();
   renderAll();

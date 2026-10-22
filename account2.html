@@ -122,11 +122,7 @@ select.in{appearance:none;padding-right:36px;
   padding:var(--sp2) 0 14px;border-bottom:3px solid var(--ink);
 }
 .logo{display:flex;align-items:center;gap:var(--sp1);color:var(--ink);text-decoration:none}
-.logo-box{
-  width:48px;height:48px;display:grid;place-items:center;background:var(--point);color:#ffffff;
-  border-radius:var(--radius-hand);font-family:var(--font-hand);font-size:29px;line-height:1;transform:rotate(-4deg);
-}
-.logo-text{font-family:var(--font-hand);font-size:29px;line-height:1}
+.logo-text{display:inline-block;padding:6px var(--sp1);background:var(--point);color:#ffffff;border-radius:8px;font-family:var(--font-hand);font-size:29px;line-height:1;text-transform:none} /* 전체 소문자 규칙 예외: 첫 글자 대문자 유지 */
 .gnb-right{display:flex;align-items:center;gap:var(--sp2);flex-wrap:wrap;justify-content:flex-end}
 .today{font-family:var(--font-deco);font-size:18px}
 .switch{display:flex;align-items:center;gap:var(--sp1);font-size:14px;font-weight:700;cursor:pointer}
@@ -394,8 +390,8 @@ footer{grid-column:1/-1;padding-top:var(--sp4);text-align:center;font-family:var
 <div class="app">
 
   <header class="gnb">
-    <a class="logo" href="#top" aria-label="gagebu 처음으로">
-      <span class="logo-box">g.</span><span class="logo-text">gagebu</span>
+    <a class="logo" href="#top" aria-label="Reci-to 처음으로">
+      <span class="logo-text">R.</span>
     </a>
     <div class="gnb-right">
       <label class="switch">
